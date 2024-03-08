@@ -1,0 +1,30 @@
+<%- include("./partials/header.ejs") %>
+
+  <h1>
+    <%= title %>
+  </h1>
+  <p>These are the physical books either available (or not) at this library location…</p>
+  <% if (bookinstance_list.length) { %>
+    <ul>
+      <% bookinstance_list.forEach(instance=> { %>
+        <li>
+          <a href="<%= instance.url %>"><%= instance.book.title %></a>
+          <% if (instance.status === "Available") { %>
+            <span class="text-success"><%= instance.status %></span>
+          <% } else if (instance.status === "Maintenance") {%>
+            <span class="text-danger"><%= instance.status %></span>
+          <% } else { %>
+            <span class="text-warning"><%= instance.status %></span>
+          <% } %>
+
+          <% if (instance.status !== "Available") { %>
+              <span>(Due: <strong><%= instance.due_back_formatted %></strong>)</span>
+          <% } %>
+        </li>
+        <% }) %>
+    </ul>
+    <% } else { %>
+      <p>There are no book copies available in this library location…</p>
+      <% } %>
+
+        <%- include("./partials/footer.ejs") %>

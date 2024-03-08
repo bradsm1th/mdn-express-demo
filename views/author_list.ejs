@@ -1,0 +1,18 @@
+<%- include("./partials/header.ejs") %>
+
+<h1><%= title %></h1>
+
+<% if (author_list.length) { %>
+    <ul>
+      <% author_list.forEach(author => { %>
+        <li><a href="<%= author.url %>"><%= author.name %></a> (<%= author.birth_year %> - <%= author.death_year %>)</li>
+
+        <% console.log(author.date_of_birth) %>
+
+      <% }) %> 
+    </ul>
+<% } else { %>
+  <p>There are no authors…</p>
+<% } %>
+
+<%- include("./partials/footer.ejs") %>
